@@ -1,0 +1,44 @@
+.btn-auth {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  text-transform: capitalize;
+  border-radius: .6rem;
+  width: 60%;
+  height: 4rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  padding: .7rem 4rem;
+  color: #fff;
+  transition: all .4s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &--1 {
+    background-color: #221122;
+
+    &:disabled {
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+  }
+
+  &--2 {
+    color: #000;
+    border: .05px solid #221122;
+    background-color: transparent;
+  }
+
+  &--3 {
+    background-color: #202327;
+  }
+
+  &__icon {
+    font-size: 3rem;
+    margin-right: 1rem;
+  }
+}
