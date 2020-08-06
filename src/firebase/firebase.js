@@ -1,5 +1,8 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore"
+import "firebase/storage"
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBA716luhEg4EvSbfhfgAgBuFiFQcfZVq8",
@@ -14,7 +17,26 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+// Firebase Authentication
 export const firebaseAuthentication = firebase.auth()
 
 export const GoogleProvider = new firebase.auth.GoogleAuthProvider()
 export const GitHubProvider = new firebase.auth.GithubAuthProvider()
+
+export { firebase }
+
+// Firebase Cloud Firestore
+export const firebaseDatabase = firebase.firestore()
+
+firebaseDatabase.collection('users').get()
+  .then(querySnapshot => {
+    console.log(querySnapshot)
+    querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+    });
+  }).catch(error => {
+    console.log(error)
+  })
+
+// Firebase Storage
+export const storage = firebase.storage()

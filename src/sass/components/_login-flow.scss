@@ -6,11 +6,14 @@
   &__container {
     width: 50%;
     display: flex;
-    flex-direction: column;
     align-items: center;
 
     &:first-child {
       margin: 0 4rem;
+    }
+
+    &:not(:first-child) {
+      flex-direction: column;
     }
   }
 
@@ -25,6 +28,7 @@
 
     span {
       display: block;
+      text-transform: capitalize;
       background-image: linear-gradient(to right, #2E2ED6, #485AF0);
       background-clip: text;
       color: transparent;

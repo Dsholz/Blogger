@@ -1,38 +1,55 @@
 import React, { Component } from 'react'
-import { firebaseAuthentication } from '../firebase/firebase'
+import { firebaseAuthentication, firebaseDatabase } from '../firebase/firebase'
 import AuthenticationForm from './AuthenticationForm'
 
 class SignUpFlow extends Component {
   state = {
     errorCode: '',
-    errorMessage: ''
+    errorMessage: '',
+    loading: false
   }
 
-  createNewUser = (e, email, password) => {
+  createNewUser = (e, email, password, name) => {
     e.preventDefault()
 
     this.setState(() => ({
       errorCode: '',
-      errorMessage: ''
+      errorMessage: '',
+      loading: true
     }))
 
     firebaseAuthentication.createUserWithEmailAndPassword(email, password)
       .then(data => {
         console.log(data)
+        this.setState(() => ({
+          loading: false
+        }))
+
+        firebaseDatabase.collection('users').add({
+          name,
+          email,
+          photoUrl: '',
+          posts: []
+        }).then(data => {
+          console.log(data)
+        }).catch(error => {
+          console.log(error)
+        })
       })
       .catch(err => {
         console.log(err)
         if (err?.message && err?.code) {
           this.setState(() => ({
             errorCode: err.code,
-            errorMessage: err.message
+            errorMessage: err.message,
+            loading: false
           }))
         }
       })
   }
 
   render() {
-    const { errorCode, errorMessage } = this.state
+    const { errorCode, errorMessage, loading } = this.state
 
     return (
       <div className="login">
@@ -42,15 +59,16 @@ class SignUpFlow extends Component {
         </div>
         <div className='login__container'>
           <h1 className='login__heading'>
-            <span>Read.</span>
-            <span>Create.</span>
-            <span>Get Answers.</span>
+            <span>read.</span>
+            <span>create.</span>
+            <span>be inspired.</span>
           </h1>
 
           <AuthenticationForm
+            loading={loading}
             errorCode={errorCode}
             errorMessage={errorMessage}
-            createNewUser={this.createNewUser}
+            authenticateUser={this.createNewUser}
             signInWithProvider={this.signInWithProvider}
           />
         </div>

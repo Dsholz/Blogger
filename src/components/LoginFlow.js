@@ -5,42 +5,58 @@ import AuthenticationForm from './AuthenticationForm'
 class LoginFlow extends Component {
   state = {
     errorCode: '',
-    errorMessage: ''
+    errorMessage: '',
+    loading: false
   }
 
-  createNewUser = (e) => {
+  loginUser = (e, email, password) => {
     e.preventDefault()
 
-    const { email, password } = this.state
+    this.setState(() => ({
+      errorCode: '',
+      errorMessage: '',
+      loading: true
+    }))
 
     firebaseAuthentication.signInWithEmailAndPassword(email, password)
       .then(data => {
         console.log(data)
+        this.setState(() => ({
+          loading: false
+        }))
       })
       .catch(err => {
         console.log(err)
+        if (err?.message && err?.code) {
+          this.setState(() => ({
+            errorCode: err.code,
+            errorMessage: err.message,
+            loading: false
+          }))
+        }
       })
   }
 
   render() {
-    const { errorCode, errorMessage } = this.state
+    const { errorCode, errorMessage, loading } = this.state
 
     return (
       <div className="login">
         <div className='login__container'>
-          <object type="image/svg+xml" data="reading-icon.svg" className="login__logo">
+          <object type="image/svg+xml" data="welcome-icon.svg" className="login__logo">
           </object>
         </div>
         <div className='login__container'>
           <h1 className='login__heading'>
             <span>Hi,</span>
-            <span>Welcome Back</span>
+            <span>Welcome Back.</span>
           </h1>
 
           <AuthenticationForm
             errorCode={errorCode}
             errorMessage={errorMessage}
-            createNewUser={this.createNewUser}
+            authenticateUser={this.loginUser}
+            loading={loading}
           />
         </div>
       </div>

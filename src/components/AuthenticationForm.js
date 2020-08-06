@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { IconContext } from 'react-icons'
 import { FcGoogle } from 'react-icons/fc'
 import { DiGithubBadge } from 'react-icons/di'
+import Loader from 'react-loader-spinner'
 import { firebaseAuthentication, GoogleProvider, GitHubProvider } from '../firebase/firebase'
 
 class AuthenticationForm extends Component {
@@ -30,13 +31,13 @@ class AuthenticationForm extends Component {
 
   render() {
     const { email, password } = this.state
-    const { errorCode, errorMessage, createNewUser } = this.props
+    const { errorCode, errorMessage, authenticateUser, loading } = this.props
 
     return (
       <Fragment>
         <form
           className='authentication'
-          onSubmit={(e) => { createNewUser(e, email, password) }}>
+          onSubmit={(e) => { authenticateUser(e, email, password) }}>
           <div className='authentication__container'>
             <input
               type='email'
@@ -45,23 +46,30 @@ class AuthenticationForm extends Component {
               className='authentication__input'
               onChange={this.handleChange}
             />
-            {errorCode === 'auth/invalid-email' && <p className='authentication__error'>{errorMessage}</p>}
-            {errorCode === 'auth/email-already-in-use' && <p className='authentication__error'>{errorMessage}</p>}
+            {(errorCode === 'auth/invalid-email' || errorCode === 'auth/email-already-in-use')
+              && <p className='authentication__error'>{errorMessage}</p>}
+            {errorCode === 'auth/user-not-found'
+              && <p className='authentication__error'>{errorMessage.replace('identifier', 'email')}</p>}
           </div>
           <div className='authentication__container'>
-            <input
-              type='password'
+            <input type='password'
               value={password}
               placeholder='Password'
               className='authentication__input'
-              onChange={this.handleChange}
-            />
-            {errorCode === 'auth/weak-password' && <p className='authentication__error'>{errorMessage}</p>}
-            {errorCode === 'auth/wrong-password' && <p className='authentication__error'>{errorMessage}</p>}
+              onChange={this.handleChange} />
+            {(errorCode === 'auth/weak-password' || errorCode === 'auth/wrong-password') &&
+              <p className='authentication__error'>{errorMessage}</p>}
           </div>
           <button className='btn-auth btn-auth--1'
             disabled={!email || !password}>
-            Sign in</button>
+            {loading ? <Loader
+              type="ThreeDots"
+              color="#485AF0"
+              visible={loading}
+              height={30}
+              width={30}
+            /> : 'sign in'}
+          </button>
         </form>
 
         <div className='authentication__other'>
