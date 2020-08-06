@@ -1,3 +1,3 @@
-## Dev Blog
+## Blogger
 
 Blog site for developers.
