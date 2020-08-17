@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import SignUpFlow from './components/SignUpFlow'
+import PostsList from './components/PostsList'
 import './sass/App.scss'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <SignUpFlow />
+        <PostsList />
       </div>
     );
   }

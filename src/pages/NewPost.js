@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import NewPost from './NewPost'
-import PostPreview from './PostPreview'
+import PostEditor from '../components/PostEditor'
+import PostPreview from '../components/PostPreview'
 import { firebaseDatabase, firebase, storage } from '../firebase/firebase'
 import moment from 'moment'
 import { v4 as uuidv4 } from 'uuid';
 
-class PostContainer extends Component {
+class NewPost extends Component {
   state = {
     postTitle: '',
     postCover: '',
@@ -67,7 +67,7 @@ class PostContainer extends Component {
   }
 
   render() {
-    const { markdown, postTitle, showPreview } = this.state
+    const { markdown, postTitle, showPreview, postCover } = this.state
 
     return (
       <div className='post-container'>
@@ -76,7 +76,7 @@ class PostContainer extends Component {
           onClick={this.togglePreview}
         >{showPreview ? 'Edit Post' : 'Show Preview'}
         </button>
-        {!showPreview ? <NewPost
+        {!showPreview ? <PostEditor
           markdown={markdown}
           addCover={this.addCover}
           postTitle={postTitle}
@@ -84,6 +84,7 @@ class PostContainer extends Component {
         />
           : <PostPreview
             markdown={markdown}
+            postCover={postCover}
             postTitle={postTitle}
           />}
         <button
@@ -96,4 +97,4 @@ class PostContainer extends Component {
   }
 }
 
-export default PostContainer
+export default NewPost

@@ -28,15 +28,5 @@ export { firebase }
 // Firebase Cloud Firestore
 export const firebaseDatabase = firebase.firestore()
 
-firebaseDatabase.collection('users').get()
-  .then(querySnapshot => {
-    console.log(querySnapshot)
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-    });
-  }).catch(error => {
-    console.log(error)
-  })
-
 // Firebase Storage
 export const storage = firebase.storage()

@@ -105,7 +105,7 @@ class NewPost extends Component {
               readOnly={true}
               value={`![Image Text](${postImage})`} />
             <IconContext.Provider value={{ className: 'new-post__icon' }}>
-              <RiFileCopy2Line onClick={this.copyUrl} color={copied ? '#13cc13' : 'black'} size={25} />
+              <RiFileCopy2Line onClick={this.copyUrl} color={copied ? '008232' : 'black'} size={25} />
             </IconContext.Provider>
           </Fragment>}
         </div>

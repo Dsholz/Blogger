@@ -1,12 +1,15 @@
 .post-preview {
   height: 85vh;
   width: 100%;
-  padding: 1.5rem 2.5rem;
   margin-top: .4rem;
   margin-bottom: .4rem;
   border: 1px solid #000;
   font-size: 1.8rem;
   overflow: auto;
+
+  &__container {
+    padding: 1.5rem 2.5rem;
+  }
 
   &::-webkit-scrollbar {
     width: 1.7rem;
