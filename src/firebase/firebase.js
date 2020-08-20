@@ -18,15 +18,15 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 // Firebase Authentication
-export const firebaseAuthentication = firebase.auth()
+const firebaseAuthentication = firebase.auth()
 
-export const GoogleProvider = new firebase.auth.GoogleAuthProvider()
-export const GitHubProvider = new firebase.auth.GithubAuthProvider()
-
-export { firebase }
+const GoogleProvider = new firebase.auth.GoogleAuthProvider()
+const GitHubProvider = new firebase.auth.GithubAuthProvider()
 
 // Firebase Cloud Firestore
-export const firebaseDatabase = firebase.firestore()
+const firebaseDatabase = firebase.firestore()
 
 // Firebase Storage
-export const storage = firebase.storage()
+const storage = firebase.storage()
+
+export { firebase, firebaseAuthentication, firebaseDatabase, storage, GitHubProvider, GoogleProvider }

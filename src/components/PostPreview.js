@@ -8,11 +8,11 @@ class PostPreview extends Component {
 
     return (
       <div className='post-preview'>
-        <img
+        {postCover && <img
           className='post-preview__img'
           src={postCover}
           alt={'Post Cover'}
-        />
+        />}
         <div
           className='post-preview__container'
           dangerouslySetInnerHTML={{

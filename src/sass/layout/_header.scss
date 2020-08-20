@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2.7rem;
+  background-color: #fdfdfd;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+
+  &__icon {
+    cursor: pointer;
+    font-size: 3.5rem;
+    text-transform: capitalize;
+    color: transparent;
+    background-clip: text;
+    transition: all 5s;
+    background-image: linear-gradient(to right, #2E2ED6, #485AF0);
+
+    &:hover {
+      background-image: linear-gradient(to left, #2E2ED6, #485AF0);
+    }
+  }
+
+  &__nav {
+    ul {
+      display: flex;
+      align-items: center;
+      font-size: 1.7rem;
+      list-style-type: none;
+
+      a {
+        text-decoration: none;
+        color: #2b2c2e;
+      }
+
+      &>*:not(:last-child) {
+        margin-right: 1.5rem;
+      }
+    }
+
+    &--item {
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+  }
+}

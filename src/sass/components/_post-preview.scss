@@ -11,20 +11,7 @@
     padding: 1.5rem 2.5rem;
   }
 
-  &::-webkit-scrollbar {
-    width: 1.7rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #cfcfcf;
-    border-radius: 3rem;
-    border: .4rem solid #fff;
-
-    &:hover {
-      cursor: pointer;
-      background-color: #8d8d8d;
-    }
-  }
+  @include custom-scrollbar;
 
   h1,
   h2,
