@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { firebaseDatabase } from '../firebase/firebase'
 
 class PostPreview extends Component {
   render() {
