@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 const Header = () => {
   return (
     <header className='header'>
-      <div className='header__icon'>
-        <span>blogger</span>
-      </div>
+      <Link to='/'>
+        <div className='header__icon'>
+          <span>blogger</span>
+        </div>
+      </Link>
       <nav className='header__nav'>
         <ul>
           <Link to='/new-post'>

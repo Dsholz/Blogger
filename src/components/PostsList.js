@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Post from './Post'
 import { connect } from 'react-redux'
 import { addPost } from '../store/actions/posts'
@@ -21,15 +22,16 @@ class Postslist extends Component {
 
   render() {
     const { posts } = this.props
-    console.log(posts)
+
     return (
       <div className='post-list'>
         <ul>
           {posts.map(postId => (
-            <Post
-              key={postId}
-              postId={postId}
-            />))}
+            <Link to={`/posts/${postId}`}>
+              <Post
+                key={postId}
+                postId={postId}
+              /></Link>))}
         </ul>
       </div>
     )

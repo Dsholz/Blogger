@@ -34,4 +34,26 @@
       }
     }
   }
+
+  &__close {
+    &-btn {
+      position: absolute;
+      left: 3%;
+      top: 1%;
+      font-size: 3rem;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-icon {
+      &:hover {
+        color: #E72A2A
+      }
+    }
+  }
 }

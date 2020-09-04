@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { MdKeyboardBackspace } from 'react-icons/md'
+import { IconContext } from 'react-icons'
 import PostEditor from '../components/PostEditor'
 import PostPreview from '../components/PostPreview'
 import { firebaseDatabase, firebase, storage } from '../firebase/firebase'
@@ -71,6 +73,14 @@ class NewPost extends Component {
 
     return (
       <div className='post-container'>
+        <button
+          class='post-container__close-btn'
+          onClick={() => this.props.history.goBack()}>
+          <IconContext.Provider value={{ className: 'post-container__close-icon' }}>
+            <MdKeyboardBackspace />
+          </IconContext.Provider>
+        </button>
+
         <button
           className='post-container__button post-container__button--right'
           onClick={this.togglePreview}
