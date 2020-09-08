@@ -1,15 +1,15 @@
-import { ADD_POST } from '../actions/posts'
+import { ADD_POST } from "../actions/posts";
 
-const posts = (state = {}, action) => {
+const posts = (state = null, action) => {
   switch (action.type) {
     case ADD_POST:
       return {
         ...state,
-        [action.id]: action.data
-      }
+        [action.id]: action.data,
+      };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default posts
+export default posts;

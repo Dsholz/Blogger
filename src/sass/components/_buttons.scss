@@ -5,14 +5,14 @@
   justify-content: center;
   border: none;
   text-transform: capitalize;
-  border-radius: .6rem;
+  border-radius: 0.6rem;
   width: 60%;
   height: 4rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
-  padding: .7rem 4rem;
+  padding: 0.7rem 4rem;
   color: #fff;
-  transition: all .4s;
+  transition: all 0.4s;
 
   &:hover {
     opacity: 0.8;
@@ -29,7 +29,7 @@
 
   &--2 {
     color: #000;
-    border: .05px solid #221122;
+    border: 0.05px solid #221122;
     background-color: transparent;
   }
 
@@ -47,9 +47,9 @@
 .btn-create {
   display: flex;
   color: #fff;
-  border-radius: .3rem;
-  padding: .7rem 2rem;
-  transition: all .3s;
+  border-radius: 0.3rem;
+  padding: 0.7rem 2rem;
+  transition: all 0.3s;
   background-color: #444547;
 
   &:hover {

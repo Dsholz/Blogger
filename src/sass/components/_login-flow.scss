@@ -1,6 +1,5 @@
 .login {
   display: flex;
-  align-items: center;
   height: 100vh;
 
   &__container {
@@ -14,6 +13,7 @@
 
     &:not(:first-child) {
       flex-direction: column;
+      justify-content: space-evenly;
     }
   }
 
@@ -24,12 +24,12 @@
   &__heading {
     align-self: start;
     font-size: 6rem;
-    margin-bottom: 3.5rem;
+    margin-bottom: 1rem;
 
     span {
       display: block;
       text-transform: capitalize;
-      background-image: linear-gradient(to right, #2E2ED6, #485AF0);
+      background-image: linear-gradient(to right, #2e2ed6, #485af0);
       background-clip: text;
       color: transparent;
     }
