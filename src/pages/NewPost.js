@@ -6,6 +6,7 @@ import PostPreview from "../components/PostPreview";
 import { firebaseDatabase, firebase, storage } from "../firebase/firebase";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
+import { connect } from "react-redux";
 
 class NewPost extends Component {
   state = {
@@ -25,29 +26,25 @@ class NewPost extends Component {
 
   createPost = () => {
     const { postTitle, markdown, postCover } = this.state;
+    const { name, photoUrl, id } = this.props.user;
+    const postDetails = { postTitle, postCover, postMarkdown: markdown };
 
     firebaseDatabase
       .collection("posts")
       .add({
-        postTitle,
-        postMarkdown: markdown,
-        postCover,
+        ...postDetails,
+        postId: uuidv4(),
         postedCreated: moment().format("MMM D"),
         postSince: moment().format("x"),
-        postAuthor: "Daniel Soladoye",
+        postAuthor: name,
+        postAuthorUrl: photoUrl,
       })
-      .then((docRef) => {
-        firebaseDatabase
+      .then(async (docRef) => {
+        await firebaseDatabase
           .collection("users")
-          .doc("GTg47A8G5gdCA8pU9PIl")
+          .doc(id)
           .update({
             posts: firebase.firestore.FieldValue.arrayUnion(docRef.id),
-          })
-          .then(() => {
-            console.log("success");
-          })
-          .catch(() => {
-            console.log("Error");
           });
       })
       .catch((error) => {
@@ -66,17 +63,12 @@ class NewPost extends Component {
 
     storageReference
       .put(e.target.files[0])
-      .then(() => {
-        storageReference
-          .getDownloadURL()
-          .then((url) => {
-            this.setState(() => ({
-              postCover: url,
-            }));
-          })
-          .catch(() => {
-            console.log("Url Error");
-          });
+      .then(async () => {
+        const coverUrl = await storageReference.getDownloadURL();
+
+        this.setState(() => ({
+          postCover: coverUrl,
+        }));
       })
       .catch((err) => {
         console.log("Upload Error");
@@ -130,4 +122,8 @@ class NewPost extends Component {
   }
 }
 
-export default NewPost;
+const mapStateToProps = ({ user }) => ({
+  user,
+});
+
+export default connect(mapStateToProps)(NewPost);

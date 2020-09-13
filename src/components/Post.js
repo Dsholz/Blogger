@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
 import moment from "moment";
 
 class Post extends Component {
   render() {
-    const { postTitle, postAuthor, postedCreated, postSince } = this.props.post;
+    const {
+      postTitle,
+      postAuthor,
+      postedCreated,
+      postSince,
+      postAuthorUrl,
+    } = this.props.post;
 
     return (
       <li className="post">
         <div className="post__container">
           <div className="post__avatar">
-            <img
-              className=""
-              src="https://api.adorable.io/avatars/152/hhhh.png"
-              alt="Author Avatar"
-            />
+            <img className="" src={postAuthorUrl} alt="Author Avatar" />
           </div>
           <div className="post__info">
             <span>{postAuthor}</span>

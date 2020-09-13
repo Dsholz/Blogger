@@ -1,14 +1,17 @@
-import React, { Fragment } from 'react'
-import Header from '../components/Header'
-import PostsList from '../components/PostsList'
+import React, { Fragment } from "react";
+import { Component } from "react";
+import Header from "../components/Header";
+import PostsList from "../components/PostsList";
 
-const HomeView = () => {
-  return (
-    <Fragment>
-      <Header />
-      <PostsList />
-    </Fragment>
-  )
+class HomeView extends Component {
+  render() {
+    return (
+      <Fragment>
+        <Header />
+        <PostsList />
+      </Fragment>
+    );
+  }
 }
 
-export default HomeView
+export default HomeView;

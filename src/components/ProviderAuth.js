@@ -2,22 +2,17 @@ import React, { Component, Fragment } from "react";
 import { IconContext } from "react-icons";
 import { FcGoogle } from "react-icons/fc";
 import { DiGithubBadge } from "react-icons/di";
-import {
-  firebaseAuthentication,
-  GoogleProvider,
-  GitHubProvider,
-} from "../firebase/firebase";
+import { GoogleProvider, GitHubProvider } from "../firebase/firebase";
+import { handleProviderAuth } from "../store/actions/user";
+import { connect } from "react-redux";
 
 export class ProviderAuth extends Component {
   signInWithProvider = (provider) => {
-    firebaseAuthentication
-      .signInWithPopup(provider)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const { dispatch } = this.props;
+
+    dispatch(handleProviderAuth(provider)).catch((data) => {
+      console.log(data);
+    });
   };
 
   render() {
@@ -51,4 +46,4 @@ export class ProviderAuth extends Component {
   }
 }
 
-export default ProviderAuth;
+export default connect()(ProviderAuth);

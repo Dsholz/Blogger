@@ -1,11 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import ProviderAuth from "../components/ProviderAuth";
 import SignUpForm from "../components/SignUpForm";
 
 const SignUp = () => (
   <div className="login">
+    <div className="login__aside">
+      <span>Already have an account?</span>
+      <Link to="/login">Login</Link>
+    </div>
     <div className="login__container">
       <object
+        aria-label="SignUp Icon"
         type="image/svg+xml"
         data="assets/resources/reading-icon.svg"
         className="login__logo"
@@ -13,18 +19,9 @@ const SignUp = () => (
     </div>
     <div className="login__container">
       <h1 className="login__heading">
-        <span>read.</span>
-        <span>create.</span>
+        <span>read &.</span>
         <span>be inspired.</span>
       </h1>
-
-      {/* <AuthenticationForm
-            loading={loading}
-            errorCode={errorCode}
-            errorMessage={errorMessage}
-            authenticateUser={this.createNewUser}
-            signInWithProvider={this.signInWithProvider}
-          /> */}
 
       <SignUpForm />
 

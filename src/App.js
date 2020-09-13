@@ -8,8 +8,29 @@ import Login from "./pages/Login";
 import HomeView from "./pages/HomeView";
 import NewPost from "./pages/NewPost";
 import "./sass/App.scss";
+import { connect } from "react-redux";
+import { firebaseAuthentication, firebaseDatabase } from "./firebase/firebase";
+import { addUser } from "./store/actions/user";
+import { setInitialPosts } from "./store/actions/posts";
 
 class App extends Component {
+  componentDidMount() {
+    const { storedUser, dispatch } = this.props;
+
+    firebaseAuthentication.onAuthStateChanged(async (user) => {
+      if (user && !storedUser) {
+        const userData = await firebaseDatabase
+          .collection("users")
+          .doc(user.uid)
+          .get();
+
+        dispatch(addUser(userData.data()));
+      }
+    });
+
+    dispatch(setInitialPosts());
+  }
+
   render() {
     return (
       <Router>
@@ -27,4 +48,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+  storedUser: user,
+});
+
+export default connect(mapStateToProps)(App);

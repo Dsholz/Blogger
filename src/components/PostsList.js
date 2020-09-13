@@ -6,21 +6,6 @@ import { addPost } from "../store/actions/posts";
 import { firebaseDatabase } from "../firebase/firebase";
 
 class Postslist extends Component {
-  state = {
-    posts: {},
-  };
-
-  componentDidMount() {
-    firebaseDatabase
-      .collection("posts")
-      .orderBy("postSince", "desc")
-      .onSnapshot((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-          this.props.dispatch(addPost(doc.id, doc.data()));
-        });
-      });
-  }
-
   render() {
     const { posts } = this.props;
 

@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import Loader from "react-loader-spinner";
-import { firebaseAuthentication, firebaseDatabase } from "../firebase/firebase";
-import { addUser, handleUserSignUp } from "../store/actions/user";
+import { handleUserSignUp } from "../store/actions/user";
 import { connect } from "react-redux";
+import { generateRandomAvatar } from "../helpers";
 
 export class SignUpForm extends Component {
   state = {
@@ -27,21 +27,24 @@ export class SignUpForm extends Component {
 
     const { name, email, password } = this.state;
     const { dispatch } = this.props;
-    const userData = { name, email, password, photoUrl: "", posts: [] };
+    const userData = {
+      name,
+      email,
+      photoUrl: generateRandomAvatar(),
+      posts: [],
+    };
 
     this.setState(() => ({
       errorMsg: "",
       loading: true,
     }));
 
-    dispatch(handleUserSignUp(userData)).catch((err) => {
-      if (err?.message && err?.code) {
-        this.setState(() => ({
-          errorCode: err.code,
-          errorMsg: err.message,
-          loading: false,
-        }));
-      }
+    dispatch(handleUserSignUp(userData, password)).catch((err) => {
+      this.setState(() => ({
+        errorCode: err.code,
+        errorMsg: err.message,
+        loading: false,
+      }));
     });
   };
 
@@ -69,8 +72,7 @@ export class SignUpForm extends Component {
               onChange={this.handleChange}
             />
             {(errorCode === "auth/invalid-email" ||
-              errorCode === "auth/email-already-in-use" ||
-              errorCode === "auth/user-not-found") && (
+              errorCode === "auth/email-already-in-use") && (
               <p className="authentication__error">{errorMsg}</p>
             )}
           </div>
@@ -82,8 +84,7 @@ export class SignUpForm extends Component {
               className="authentication__input"
               onChange={this.handleChange}
             />
-            {(errorCode === "auth/weak-password" ||
-              errorCode === "auth/wrong-password") && (
+            {errorCode === "auth/weak-password" && (
               <p className="authentication__error">{errorMsg}</p>
             )}
           </div>

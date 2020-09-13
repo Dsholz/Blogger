@@ -1,6 +1,25 @@
 .login {
+  position: relative;
   display: flex;
   height: 100vh;
+
+  &__aside {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.6rem;
+
+    span {
+      margin-right: 0.5rem;
+    }
+
+    a {
+      text-decoration: none;
+      background-clip: text;
+      -webkit-background-clip: text;
+      background-image: linear-gradient(to right, #2e2ed6, #485af0);
+    }
+  }
 
   &__container {
     width: 50%;
@@ -18,6 +37,7 @@
   }
 
   &__logo {
+    height: 100%;
     width: 100%;
   }
 

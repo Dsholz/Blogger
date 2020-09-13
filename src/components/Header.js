@@ -1,29 +1,51 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { firebaseAuthentication } from "../firebase/firebase";
+import { addUser } from "../store/actions/user";
 
-const Header = () => {
+const Header = (props) => {
+  const logout = () => {
+    firebaseAuthentication.signOut();
+
+    props.dispatch(addUser(null));
+  };
+
   return (
-    <header className='header'>
-      <Link to='/'>
-        <div className='header__icon'>
+    <header className="header">
+      <Link to="/">
+        <div className="header__icon">
           <span>blogger</span>
         </div>
       </Link>
-      <nav className='header__nav'>
+      <nav className="header__nav">
         <ul>
-          <Link to='/new-post'>
-            <li className='header__nav--item btn-create'>create post</li>
+          <Link to="/new-post">
+            <li className="header__nav--item btn-create">create post</li>
           </Link>
-          <Link to=''>
-            <li className='header__nav--item'>profile</li>
-          </Link>
-          <Link to=''>
-            <li className='header__nav--item'>logout</li>
-          </Link>
+          {props.user && (
+            <Fragment>
+              <Link to="">
+                <li className="header__nav--item">profile</li>
+              </Link>
+              <li onClick={logout} className="header__nav--item">
+                logout
+              </li>
+            </Fragment>
+          )}
+          {!props.user && (
+            <Link to="/login">
+              <li className="header__nav--item">Login</li>
+            </Link>
+          )}
         </ul>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+const mapStateToProps = ({ user }) => ({
+  user,
+});
+
+export default connect(mapStateToProps)(Header);

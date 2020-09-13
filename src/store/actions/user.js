@@ -15,19 +15,64 @@ export const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-export const handleUserSignUp = (userData) => {
+export const handleUserSignUp = (userData, password) => {
   return (dispatch) => {
-    const { email, password } = userData;
-
     return firebaseAuthentication
-      .createUserWithEmailAndPassword(email, password)
-      .then(async (data) => {
+      .createUserWithEmailAndPassword(userData.email, password)
+      .then(async (response) => {
         await firebaseDatabase
           .collection("users")
-          .doc(data.user.uid)
-          .set(userData);
+          .doc(response.user.uid)
+          .set({ ...userData, id: response.user.uid });
 
-        dispatch(addUser(userData));
+        dispatch(addUser({ ...userData, id: response.user.uid }));
+      });
+  };
+};
+
+export const handleUserLogin = (email, password) => {
+  return (dispatch) => {
+    return firebaseAuthentication
+      .signInWithEmailAndPassword(email, password)
+      .then(async (response) => {
+        const userData = await firebaseDatabase
+          .collection("users")
+          .doc(response.user.uid)
+          .get();
+
+        dispatch(addUser(userData.data()));
+      });
+  };
+};
+
+export const handleProviderAuth = (provider) => {
+  return (dispatch) => {
+    return firebaseAuthentication
+      .signInWithPopup(provider)
+      .then(async (response) => {
+        if (response.additionalUserInfo.isNewUser) {
+          const newUserData = {
+            id: response.user.uid,
+            name: response.user.displayName,
+            email: response.user.email,
+            photoUrl: response.user.photoURL,
+            posts: [],
+          };
+
+          await firebaseDatabase
+            .collection("users")
+            .doc(response.user.uid)
+            .set(newUserData);
+
+          dispatch(addUser(newUserData));
+        } else {
+          const userData = await firebaseDatabase
+            .collection("users")
+            .doc(response.user.uid)
+            .get();
+
+          dispatch(addUser(userData));
+        }
       });
   };
 };

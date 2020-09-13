@@ -1,50 +1,19 @@
 import React, { Component } from "react";
-import { firebaseAuthentication } from "../firebase/firebase";
-import AuthenticationForm from "../components/AuthenticationForm";
+import { Link } from "react-router-dom";
+import LoginForm from "../components/LoginForm";
+import ProviderAuth from "../components/ProviderAuth";
 
 class Login extends Component {
-  state = {
-    errorCode: "",
-    errorMessage: "",
-    loading: false,
-  };
-
-  loginUser = (e, email, password) => {
-    e.preventDefault();
-
-    this.setState(() => ({
-      errorCode: "",
-      errorMessage: "",
-      loading: true,
-    }));
-
-    firebaseAuthentication
-      .signInWithEmailAndPassword(email, password)
-      .then((data) => {
-        console.log(data);
-        this.setState(() => ({
-          loading: false,
-        }));
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err?.message && err?.code) {
-          this.setState(() => ({
-            errorCode: err.code,
-            errorMessage: err.message,
-            loading: false,
-          }));
-        }
-      });
-  };
-
   render() {
-    const { errorCode, errorMessage, loading } = this.state;
-
     return (
       <div className="login">
+        <div className="login__aside">
+          <span>Are you a new user?</span>
+          <Link to="/signup">Create account</Link>
+        </div>
         <div className="login__container">
           <object
+            aria-label="Login Icon"
             type="image/svg+xml"
             data="assets/resources/welcome-icon.svg"
             className="login__logo"
@@ -56,12 +25,13 @@ class Login extends Component {
             <span>Welcome Back.</span>
           </h1>
 
-          <AuthenticationForm
-            errorCode={errorCode}
-            errorMessage={errorMessage}
-            authenticateUser={this.loginUser}
-            loading={loading}
-          />
+          <LoginForm />
+
+          <div className="authentication__other">
+            <span>Or</span>
+          </div>
+
+          <ProviderAuth />
         </div>
       </div>
     );
