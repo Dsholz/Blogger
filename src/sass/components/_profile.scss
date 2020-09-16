@@ -1,0 +1,150 @@
+.profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  & > *:not(:last-child) {
+    margin-bottom: 3.5rem;
+  }
+
+  &__edit {
+    cursor: pointer;
+    position: absolute;
+    top: 3%;
+    right: 0;
+    font-size: 3rem;
+    color: #d4d4d4;
+    opacity: 0.85;
+    transition: all 0.3s;
+
+    &:hover,
+    &:focus {
+      color: #b4b4b4;
+      opacity: 1;
+    }
+  }
+
+  &__img-container {
+    position: relative;
+    height: 12rem;
+    width: 12rem;
+    border-radius: 10rem;
+    overflow: hidden;
+
+    input {
+      display: none;
+    }
+
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: all 0.3s;
+
+      &:hover {
+        display: flex;
+        cursor: pointer;
+        opacity: 0.3;
+        background-color: #000;
+      }
+    }
+  }
+
+  &__img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    & > *:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__form-container {
+    display: flex;
+
+    @include respond(480px) {
+      flex-direction: column;
+
+      & > *:not(:last-child) {
+        margin-bottom: 1.7rem;
+      }
+    }
+  }
+
+  &__input {
+    flex: 1;
+    padding: 1rem;
+    transition: all 0.3s;
+
+    &:first-child {
+      margin-right: 1.5rem;
+
+      @include respond(480px) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__input-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 2%;
+    font-size: 2.2rem;
+    transition: all 0.3s;
+  }
+
+  &__input-container {
+    position: relative;
+    flex: 1 1;
+    display: flex;
+    align-items: center;
+
+    &:first-child {
+      margin-right: 1.5rem;
+
+      @include respond(480px) {
+        margin-right: 0;
+      }
+    }
+
+    input:first-child {
+      margin-right: 0;
+    }
+  }
+
+  &__btn {
+    align-self: flex-start;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    padding: 1rem 2rem;
+    color: #fff;
+    border: none;
+    transition: all 0.4s;
+    background-color: rgb(207, 76, 240);
+
+    &:disabled {
+      opacity: 0.7;
+    }
+  }
+
+  &__error {
+    font-size: 1.8rem;
+  }
+
+  &__icon {
+    font-size: 3rem;
+    color: #fff;
+  }
+}

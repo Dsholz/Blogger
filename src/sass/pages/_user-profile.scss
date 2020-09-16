@@ -1,0 +1,42 @@
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 2rem;
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 100;
+    margin-bottom: 2.5rem;
+    align-self: flex-start;
+    color: transparent;
+    background-clip: text;
+    background-image: linear-gradient(to right, #2e2ed6, #485af0);
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    div {
+      font-size: 2rem;
+    }
+  }
+
+  a {
+    width: 70%;
+    text-decoration: none;
+
+    @include respond(700px) {
+      width: 98%;
+    }
+  }
+}
+
+//Styling For React Toastify
+.Toastify__toast {
+  border-radius: 0.7rem !important;
+}

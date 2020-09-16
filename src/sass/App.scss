@@ -1,15 +1,19 @@
-@import 'abstracts/mixins';
+@import "abstracts/mixins";
 
-@import 'base/base';
+@import "base/base";
+@import "base/typography";
 
-@import 'components/buttons';
-@import 'components/login-flow';
-@import 'components/authentication-form';
-@import 'components/new-post';
-@import 'components/post-preview';
-@import 'components/post-container';
-@import 'components/post';
-@import 'components/post-content';
+@import "components/buttons";
+@import "components/login-flow";
+@import "components/authentication-form";
+@import "components/new-post";
+@import "components/post-preview";
+@import "components/post-container";
+@import "components/post";
+@import "components/post-content";
+@import "components/profile";
 
-@import 'layout/post-list';
-@import 'layout/header';
+@import "pages/user-profile";
+
+@import "layout/post-list";
+@import "layout/header";

@@ -1,6 +1,7 @@
 .login {
   position: relative;
   display: flex;
+  justify-content: center;
   height: 100vh;
 
   &__aside {
@@ -26,13 +27,28 @@
     display: flex;
     align-items: center;
 
-    &:first-child {
-      margin: 0 4rem;
+    &--1 {
+      @include respond(855px) {
+        width: 35%;
+      }
+
+      @include respond(660px) {
+        display: none;
+      }
     }
 
-    &:not(:first-child) {
+    &--2 {
       flex-direction: column;
       justify-content: space-evenly;
+
+      @include respond(855px) {
+        width: 65%;
+        margin-top: 1.5rem;
+      }
+      @include respond(660px) {
+        width: 95%;
+        margin-top: 2rem;
+      }
     }
   }
 

@@ -10,7 +10,9 @@ class Post extends Component {
       postedCreated,
       postSince,
       postAuthorUrl,
+      postAuthorEmail,
     } = this.props.post;
+    const { user } = this.props;
 
     return (
       <li className="post">
@@ -19,7 +21,7 @@ class Post extends Component {
             <img className="" src={postAuthorUrl} alt="Author Avatar" />
           </div>
           <div className="post__info">
-            <span>{postAuthor}</span>
+            <span>{user?.email === postAuthorEmail ? "You" : postAuthor}</span>
             <span>{`${postedCreated} (${moment(
               Number(postSince)
             ).fromNow()})`}</span>
@@ -31,10 +33,11 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }, { postId }) => {
+const mapStateToProps = ({ posts, user }, { postId }) => {
   const post = posts[postId];
 
   return {
+    user,
     post,
   };
 };

@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 2.7rem;
-  background-color: #fdfdfd;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, .1);
+  background-color: #fafafa;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 
   a {
     text-decoration: none;
@@ -17,10 +17,10 @@
     color: transparent;
     background-clip: text;
     transition: all 5s;
-    background-image: linear-gradient(to right, #2E2ED6, #485AF0);
+    background-image: linear-gradient(to right, #2e2ed6, #485af0);
 
     &:hover {
-      background-image: linear-gradient(to left, #2E2ED6, #485AF0);
+      background-image: linear-gradient(to left, #2e2ed6, #485af0);
     }
   }
 
@@ -36,7 +36,7 @@
         color: #2b2c2e;
       }
 
-      &>*:not(:last-child) {
+      & > *:not(:last-child) {
         margin-right: 1.5rem;
       }
     }

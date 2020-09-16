@@ -2,13 +2,13 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { firebaseAuthentication } from "../firebase/firebase";
-import { addUser } from "../store/actions/user";
+import { removeUser } from "../store/actions/user";
 
 const Header = (props) => {
   const logout = () => {
     firebaseAuthentication.signOut();
 
-    props.dispatch(addUser(null));
+    props.dispatch(removeUser());
   };
 
   return (
@@ -25,7 +25,7 @@ const Header = (props) => {
           </Link>
           {props.user && (
             <Fragment>
-              <Link to="">
+              <Link to="/profile">
                 <li className="header__nav--item">profile</li>
               </Link>
               <li onClick={logout} className="header__nav--item">

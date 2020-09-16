@@ -9,7 +9,7 @@ const SignUp = () => (
       <span>Already have an account?</span>
       <Link to="/login">Login</Link>
     </div>
-    <div className="login__container">
+    <div className="login__container login__container--1">
       <object
         aria-label="SignUp Icon"
         type="image/svg+xml"
@@ -17,7 +17,7 @@ const SignUp = () => (
         className="login__logo"
       ></object>
     </div>
-    <div className="login__container">
+    <div className="login__container login__container--2">
       <h1 className="login__heading">
         <span>read &.</span>
         <span>be inspired.</span>

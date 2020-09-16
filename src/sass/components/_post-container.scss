@@ -4,21 +4,31 @@
   margin: 0 12%;
   margin-top: 1rem;
 
+  @include respond(570px) {
+    margin: 0 2%;
+    margin-top: 1rem;
+  }
+
   &__button {
     border: none;
-    transition: all .4s;
+    transition: all 0.4s;
     padding: 1rem 1.6rem;
-    border-radius: .4rem;
+    border-radius: 0.4rem;
     font-size: 1.6rem;
 
     &--left {
       align-self: flex-start;
       color: #fff;
-      background-color: #485AF0;
+      background-color: #485af0;
 
       &:hover {
         cursor: pointer;
         background-color: #2133d1;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.65;
       }
     }
 
@@ -52,7 +62,7 @@
 
     &-icon {
       &:hover {
-        color: #E72A2A
+        color: #e72a2a;
       }
     }
   }

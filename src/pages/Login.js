@@ -11,7 +11,7 @@ class Login extends Component {
           <span>Are you a new user?</span>
           <Link to="/signup">Create account</Link>
         </div>
-        <div className="login__container">
+        <div className="login__container login__container--1">
           <object
             aria-label="Login Icon"
             type="image/svg+xml"
@@ -19,7 +19,7 @@ class Login extends Component {
             className="login__logo"
           ></object>
         </div>
-        <div className="login__container">
+        <div className="login__container login__container--2">
           <h1 className="login__heading">
             <span>Hi,</span>
             <span>Welcome Back.</span>

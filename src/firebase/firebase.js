@@ -26,13 +26,13 @@ const GitHubProvider = new firebase.auth.GithubAuthProvider();
 const firebaseDatabase = firebase.firestore();
 
 // Firebase Storage
-const storage = firebase.storage();
+const firebaseStorage = firebase.storage();
 
 export {
   firebase,
   firebaseAuthentication,
   firebaseDatabase,
-  storage,
+  firebaseStorage,
   GitHubProvider,
   GoogleProvider,
 };

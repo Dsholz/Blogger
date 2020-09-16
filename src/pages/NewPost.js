@@ -3,10 +3,15 @@ import { MdKeyboardBackspace } from "react-icons/md";
 import { IconContext } from "react-icons";
 import PostEditor from "../components/PostEditor";
 import PostPreview from "../components/PostPreview";
-import { firebaseDatabase, firebase, storage } from "../firebase/firebase";
+import {
+  firebaseDatabase,
+  firebase,
+  firebaseStorage,
+} from "../firebase/firebase";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 import { connect } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 class NewPost extends Component {
   state = {
@@ -14,6 +19,8 @@ class NewPost extends Component {
     postCover: "",
     markdown: "",
     showPreview: false,
+    loadingCover: false,
+    loading: false,
   };
 
   handleChange = (e) => {
@@ -24,10 +31,14 @@ class NewPost extends Component {
     }));
   };
 
-  createPost = () => {
+  createPost = (e) => {
+    e.preventDefault();
+
     const { postTitle, markdown, postCover } = this.state;
-    const { name, photoUrl, id } = this.props.user;
+    const { name, photoUrl, id, email } = this.props.user;
     const postDetails = { postTitle, postCover, postMarkdown: markdown };
+
+    this.setState(() => ({ loading: true }));
 
     firebaseDatabase
       .collection("posts")
@@ -38,6 +49,7 @@ class NewPost extends Component {
         postSince: moment().format("x"),
         postAuthor: name,
         postAuthorUrl: photoUrl,
+        postAuthorEmail: email,
       })
       .then(async (docRef) => {
         await firebaseDatabase
@@ -46,6 +58,10 @@ class NewPost extends Component {
           .update({
             posts: firebase.firestore.FieldValue.arrayUnion(docRef.id),
           });
+
+        this.setState(() => ({ loading: false }));
+
+        toast.success("Post Created Successfully");
       })
       .catch((error) => {
         console.log(error);
@@ -59,7 +75,11 @@ class NewPost extends Component {
   };
 
   addCover = (e) => {
-    const storageReference = storage.ref().child(`Cover Photos/${uuidv4()}`);
+    const storageReference = firebaseStorage
+      .ref()
+      .child(`Cover Photos/${uuidv4()}`);
+
+    this.setState(() => ({ loadingCover: true }));
 
     storageReference
       .put(e.target.files[0])
@@ -67,6 +87,7 @@ class NewPost extends Component {
         const coverUrl = await storageReference.getDownloadURL();
 
         this.setState(() => ({
+          loadingCover: false,
           postCover: coverUrl,
         }));
       })
@@ -76,7 +97,14 @@ class NewPost extends Component {
   };
 
   render() {
-    const { markdown, postTitle, showPreview, postCover } = this.state;
+    const {
+      markdown,
+      postTitle,
+      showPreview,
+      postCover,
+      loadingCover,
+      loading,
+    } = this.state;
 
     return (
       <div className="post-container">
@@ -97,26 +125,34 @@ class NewPost extends Component {
         >
           {showPreview ? "Edit Post" : "Show Preview"}
         </button>
-        {!showPreview ? (
-          <PostEditor
-            markdown={markdown}
-            addCover={this.addCover}
-            postTitle={postTitle}
-            handleChange={this.handleChange}
-          />
-        ) : (
-          <PostPreview
-            markdown={markdown}
-            postCover={postCover}
-            postTitle={postTitle}
-          />
-        )}
-        <button
-          onClick={this.createPost}
-          className="post-container__button post-container__button--left"
-        >
-          Publish Post
-        </button>
+        <form>
+          {!showPreview ? (
+            <PostEditor
+              markdown={markdown}
+              addCover={this.addCover}
+              coverExists={postCover}
+              loadingCover={loadingCover}
+              removeCover={() => this.setState(() => ({ postCover: "" }))}
+              postTitle={postTitle}
+              handleChange={this.handleChange}
+            />
+          ) : (
+            <PostPreview
+              markdown={markdown}
+              postCover={postCover}
+              postTitle={postTitle}
+            />
+          )}
+          <button
+            type="submit"
+            disabled={!postTitle || !markdown}
+            onClick={this.createPost}
+            className="post-container__button post-container__button--left"
+          >
+            {loading ? "Publishing..." : "Publish Post"}
+          </button>
+        </form>
+        <ToastContainer className="toast__font-size" position="bottom-right" />
       </div>
     );
   }

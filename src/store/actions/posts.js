@@ -22,11 +22,11 @@ export const setInitialPosts = () => {
       .get()
       .then((snapshot) => {
         let posts = [];
-        snapshot.forEach((doc) => posts.push(doc.data()));
+        snapshot.forEach((doc) => posts.push({ id: doc.id, ...doc.data() }));
 
-        const newPosts = posts.reduce((acc, cur) => {
-          acc[cur.postSince] = cur;
-
+        const newPosts = posts.reduce((acc, post) => {
+          acc[post.id] = post;
+          delete post.id;
           return acc;
         }, {});
 

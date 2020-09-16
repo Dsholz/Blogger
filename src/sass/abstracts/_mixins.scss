@@ -6,11 +6,17 @@
   &::-webkit-scrollbar-thumb {
     background-color: #cfcfcf;
     border-radius: 3rem;
-    border: .4rem solid #fff;
+    border: 0.4rem solid #fff;
 
     &:hover {
       cursor: pointer;
       background-color: #8d8d8d;
     }
+  }
+}
+
+@mixin respond($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
   }
 }

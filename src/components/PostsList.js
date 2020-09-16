@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Post from "./Post";
 import { connect } from "react-redux";
-import { addPost } from "../store/actions/posts";
-import { firebaseDatabase } from "../firebase/firebase";
 
 class Postslist extends Component {
   render() {

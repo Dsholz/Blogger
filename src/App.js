@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { firebaseAuthentication, firebaseDatabase } from "./firebase/firebase";
 import { addUser } from "./store/actions/user";
 import { setInitialPosts } from "./store/actions/posts";
+import UserProfile from "./pages/UserProfile";
 
 class App extends Component {
   componentDidMount() {
@@ -38,6 +39,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={HomeView} />
             <PrivateRoute path="/new-post" component={NewPost} />
+            <PrivateRoute path="/profile" component={UserProfile} />
             <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/signup" component={SignUp} />
             <Route path="/posts/:id" component={PostContent} />
