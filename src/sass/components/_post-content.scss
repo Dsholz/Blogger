@@ -1,5 +1,5 @@
 .post-content-container {
-  margin: 4rem 0;
+  margin: 3rem 0;
   display: flex;
   justify-content: center;
 }
@@ -8,14 +8,27 @@
   width: 80%;
   font-size: 1.8rem;
 
-  &>div {
+  @include respond(850px) {
+    width: 100%;
+  }
+
+  & > div:not(:first-child) {
     padding: 0 4rem;
+
+    @include respond(600px) {
+      padding: 0 2rem;
+    }
+  }
+
+  &__img-container {
+    height: 50vh;
+    margin-bottom: 3rem;
   }
 
   &__img {
     object-fit: contain;
     width: 100%;
-    margin-bottom: 3.5rem;
+    height: 100%;
   }
 
   &__title {
@@ -30,14 +43,14 @@
     margin-bottom: 2rem;
     height: 7rem;
 
-    &>*:not(:last-child) {
+    & > *:not(:last-child) {
       margin-right: 1rem;
     }
 
     &--dot {
       background-color: gray;
-      height: .5rem;
-      width: .5rem;
+      height: 0.5rem;
+      width: 0.5rem;
       border-radius: 10rem;
     }
 
@@ -56,14 +69,13 @@
   }
 
   &__markdown {
-
     h1,
     h2,
     h3,
     h4,
     h5,
     h6 {
-      margin-top: .6rem;
+      margin-top: 0.6rem;
       margin-bottom: 1rem;
     }
 
@@ -79,13 +91,13 @@
       code {
         background-color: #00000026;
         color: #1b1b32;
-        border-radius: .1rem;
+        border-radius: 0.1rem;
         font-size: 80%;
-        padding: .25rem;
+        padding: 0.25rem;
       }
 
       li {
-        margin-bottom: .5rem;
+        margin-bottom: 0.5rem;
       }
 
       ul {
@@ -110,9 +122,9 @@
       code {
         background-color: #00000026;
         color: #1b1b32;
-        border-radius: .1rem;
+        border-radius: 0.1rem;
         font-size: 80%;
-        padding: .2rem;
+        padding: 0.2rem;
       }
     }
 
@@ -124,7 +136,7 @@
     a {
       color: #1b1bd8;
       text-decoration: none;
-      transition: all .3s;
+      transition: all 0.3s;
 
       &:hover {
         text-decoration: underline;
@@ -132,7 +144,7 @@
     }
 
     blockquote {
-      border-left: 3px solid #485AF0;
+      border-left: 3px solid #485af0;
       padding: 1rem 0 1rem 1rem;
       margin: 1.5rem 0;
     }

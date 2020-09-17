@@ -8,7 +8,7 @@ import Profile from "../components/Profile";
 export class UserProfile extends Component {
   render() {
     const { user, posts } = this.props;
-    const userPosts = posts.filter((post) => user.posts.includes(post));
+    const userPosts = posts.filter((post) => user?.posts?.includes(post));
 
     return (
       <Fragment>

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { firebaseAuthentication, firebaseDatabase } from "../firebase/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { RiGalleryUploadLine } from "react-icons/ri";
+import { RiImageAddLine } from "react-icons/ri";
 import { FaUserEdit } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { IconContext } from "react-icons";
@@ -15,6 +15,7 @@ export class Profile extends Component {
   state = {
     name: "",
     email: "",
+    currentEmail: "",
     password: "",
     rPassword: "",
     passwordShown: false,
@@ -27,7 +28,7 @@ export class Profile extends Component {
   componentDidMount() {
     const { name, email, photoUrl } = this.props.user;
 
-    this.setState(() => ({ name, email, photoUrl }));
+    this.setState(() => ({ name, email, photoUrl, currentEmail: email }));
   }
 
   handleChange = (e) => {
@@ -45,7 +46,14 @@ export class Profile extends Component {
 
   updateUserProfile = (e) => {
     e.preventDefault();
-    const { name, email, password, rPassword, photoUrl } = this.state;
+    const {
+      name,
+      email,
+      currentEmail,
+      password,
+      rPassword,
+      photoUrl,
+    } = this.state;
     const { id, posts } = this.props.user;
     const userData = { id, name, email, photoUrl, posts };
     const currentUser = firebaseAuthentication.currentUser;
@@ -132,7 +140,7 @@ export class Profile extends Component {
           />
           <label htmlFor="uploadImage">
             <IconContext.Provider value={{ className: "profile__icon" }}>
-              <RiGalleryUploadLine />
+              <RiImageAddLine />
             </IconContext.Provider>
           </label>
         </div>
@@ -234,7 +242,7 @@ export class Profile extends Component {
                 loading
               }
             >
-              {loading ? "Saving..." : "Save Changes"}
+              {loading ? "Updating..." : "Update Profile"}
             </button>
           )}
         </form>

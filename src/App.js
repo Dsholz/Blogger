@@ -11,7 +11,6 @@ import "./sass/App.scss";
 import { connect } from "react-redux";
 import { firebaseAuthentication, firebaseDatabase } from "./firebase/firebase";
 import { addUser } from "./store/actions/user";
-import { setInitialPosts } from "./store/actions/posts";
 import UserProfile from "./pages/UserProfile";
 
 class App extends Component {
@@ -28,8 +27,6 @@ class App extends Component {
         dispatch(addUser(userData.data()));
       }
     });
-
-    dispatch(setInitialPosts());
   }
 
   render() {

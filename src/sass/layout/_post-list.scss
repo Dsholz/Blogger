@@ -3,14 +3,14 @@
   justify-content: center;
   margin: 4rem;
 
-  @include respond(550px) {
+  @include respond(800px) {
     margin: 4rem 2rem;
   }
 
   ul {
     width: 65%;
 
-    @include respond(750px) {
+    @include respond(800px) {
       width: 90%;
     }
 

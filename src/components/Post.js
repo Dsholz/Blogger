@@ -21,8 +21,10 @@ class Post extends Component {
             <img className="" src={postAuthorUrl} alt="Author Avatar" />
           </div>
           <div className="post__info">
-            <span>{user?.email === postAuthorEmail ? "You" : postAuthor}</span>
-            <span>{`${postedCreated} (${moment(
+            <span className="post__text">
+              {user?.email === postAuthorEmail ? "You" : postAuthor}
+            </span>
+            <span className="post__text">{`${postedCreated} (${moment(
               Number(postSince)
             ).fromNow()})`}</span>
           </div>
