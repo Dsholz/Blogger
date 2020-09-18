@@ -11,8 +11,8 @@ class Postslist extends Component {
     return (
       <div className="post-list">
         <ul>
-          {posts.length === 0 && <PostsListLoader />}
-          {posts.map((postId) => (
+          {!posts && <PostsListLoader />}
+          {posts?.map((postId) => (
             <Link key={postId} to={`/posts/${postId}`}>
               <Post postId={postId} />
             </Link>
@@ -25,7 +25,7 @@ class Postslist extends Component {
 
 const mapStateToProps = ({ posts }) => {
   return {
-    posts: posts ? Object.keys(posts) : [],
+    posts: posts ? Object.keys(posts) : null,
   };
 };
 

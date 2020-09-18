@@ -3,6 +3,8 @@ import Loader from "react-loader-spinner";
 import { handleUserSignUp } from "../store/actions/user";
 import { connect } from "react-redux";
 import { generateRandomAvatar } from "../helpers";
+import { IconContext } from "react-icons";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 export class SignUpForm extends Component {
   state = {
@@ -12,6 +14,7 @@ export class SignUpForm extends Component {
     loading: false,
     errorCode: "",
     errorMsg: "",
+    passwordShown: false,
   };
 
   handleChange = (e) => {
@@ -48,8 +51,28 @@ export class SignUpForm extends Component {
     });
   };
 
+  togglePasswordVisibility = () => {
+    const inputElement = document.querySelector(`#password`);
+
+    this.setState((prevstate) => ({ passwordShown: !prevstate.passwordShown }));
+
+    if (inputElement?.type === "password") {
+      inputElement.type = "text";
+    } else if (inputElement?.type === "text") {
+      inputElement.type = "password";
+    }
+  };
+
   render() {
-    const { name, email, password, loading, errorCode, errorMsg } = this.state;
+    const {
+      name,
+      email,
+      password,
+      loading,
+      errorCode,
+      errorMsg,
+      passwordShown,
+    } = this.state;
 
     return (
       <Fragment>
@@ -77,13 +100,29 @@ export class SignUpForm extends Component {
             )}
           </div>
           <div className="authentication__container">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              className="authentication__input"
-              onChange={this.handleChange}
-            />
+            <div>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                className="authentication__input"
+                onChange={this.handleChange}
+              />
+              <IconContext.Provider
+                value={{
+                  className: "authentication__input-icon",
+                }}
+              >
+                {passwordShown ? (
+                  <AiFillEyeInvisible
+                    onClick={() => this.togglePasswordVisibility()}
+                  />
+                ) : (
+                  <AiFillEye onClick={() => this.togglePasswordVisibility()} />
+                )}
+              </IconContext.Provider>
+            </div>
             {errorCode === "auth/weak-password" && (
               <p className="authentication__error">{errorMsg}</p>
             )}

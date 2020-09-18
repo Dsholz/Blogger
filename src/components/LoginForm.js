@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
 import { handleUserLogin } from "../store/actions/user";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { IconContext } from "react-icons";
 
 export class LoginForm extends Component {
   state = {
@@ -10,6 +12,7 @@ export class LoginForm extends Component {
     errorCode: "",
     errorMsg: "",
     loading: false,
+    passwordShown: false,
   };
 
   handleChange = (e) => {
@@ -39,8 +42,27 @@ export class LoginForm extends Component {
     });
   };
 
+  togglePasswordVisibility = () => {
+    const inputElement = document.querySelector(`#password`);
+
+    this.setState((prevstate) => ({ passwordShown: !prevstate.passwordShown }));
+
+    if (inputElement?.type === "password") {
+      inputElement.type = "text";
+    } else if (inputElement?.type === "text") {
+      inputElement.type = "password";
+    }
+  };
+
   render() {
-    const { email, password, loading, errorCode, errorMsg } = this.state;
+    const {
+      email,
+      password,
+      loading,
+      errorCode,
+      errorMsg,
+      passwordShown,
+    } = this.state;
 
     return (
       <Fragment>
@@ -64,14 +86,30 @@ export class LoginForm extends Component {
             )}
           </div>
           <div className="authentication__container">
-            <input
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Password"
-              className="authentication__input"
-              onChange={this.handleChange}
-            />
+            <div>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                id="password"
+                placeholder="Password"
+                className="authentication__input"
+                onChange={this.handleChange}
+              />
+              <IconContext.Provider
+                value={{
+                  className: "authentication__input-icon",
+                }}
+              >
+                {passwordShown ? (
+                  <AiFillEyeInvisible
+                    onClick={() => this.togglePasswordVisibility()}
+                  />
+                ) : (
+                  <AiFillEye onClick={() => this.togglePasswordVisibility()} />
+                )}
+              </IconContext.Provider>
+            </div>
             {errorCode === "auth/wrong-password" && (
               <p className="authentication__error">{errorMsg}</p>
             )}

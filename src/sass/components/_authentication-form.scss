@@ -8,11 +8,16 @@
     width: 80%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-bottom: 1.9rem;
 
     @include respond(660px) {
       width: 100%;
+    }
+
+    div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.8rem;
     }
   }
 
@@ -21,7 +26,12 @@
     height: 4rem;
     font-size: 1.6rem;
     padding-left: 1rem;
-    margin-bottom: 0.8rem;
+  }
+
+  &__input-icon {
+    cursor: pointer;
+    margin-left: -2.5rem;
+    font-size: 2.2rem;
   }
 
   &__error {

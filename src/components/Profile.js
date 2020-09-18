@@ -127,7 +127,7 @@ export class Profile extends Component {
             accept="image/*"
             name="uploadImage"
             id="uploadImage"
-            disabled={!editable}
+            disabled={true}
             onChange={this.uploadAvatar}
           />
           <label htmlFor="uploadImage">
@@ -143,7 +143,7 @@ export class Profile extends Component {
               value={name}
               className="profile__input"
               placeholder="Name"
-              disabled={!editable}
+              disabled={true}
               onChange={this.handleChange}
               type="text"
             />
