@@ -35,7 +35,7 @@ class NewPost extends Component {
     e.preventDefault();
 
     const { postTitle, markdown, postCover } = this.state;
-    const { name, photoUrl, id, email } = this.props.user;
+    const { name, photoUrl, id } = this.props.user;
     const postDetails = { postTitle, postCover, postMarkdown: markdown };
 
     this.setState(() => ({ loading: true }));

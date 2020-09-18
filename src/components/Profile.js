@@ -15,7 +15,6 @@ export class Profile extends Component {
   state = {
     name: "",
     email: "",
-    currentEmail: "",
     password: "",
     rPassword: "",
     passwordShown: false,
@@ -46,14 +45,7 @@ export class Profile extends Component {
 
   updateUserProfile = (e) => {
     e.preventDefault();
-    const {
-      name,
-      email,
-      currentEmail,
-      password,
-      rPassword,
-      photoUrl,
-    } = this.state;
+    const { name, email, password, rPassword, photoUrl } = this.state;
     const { id, posts } = this.props.user;
     const userData = { id, name, email, photoUrl, posts };
     const currentUser = firebaseAuthentication.currentUser;
