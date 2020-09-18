@@ -1,3 +1,3 @@
 ## Blogger
 
-Blog site for developers.
+Blogging Web Application.
