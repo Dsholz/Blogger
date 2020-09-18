@@ -49,7 +49,7 @@ class NewPost extends Component {
         postSince: moment().format("x"),
         postAuthor: name,
         postAuthorUrl: photoUrl,
-        postAuthorEmail: email,
+        postAuthorId: id,
       })
       .then(async (docRef) => {
         await firebaseDatabase

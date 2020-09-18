@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./routers/PrivateRoute";
 import PublicRoute from "./routers/PublicRoute";
-import PostContent from "./pages/PostContent";
+import PostDetails from "./pages/PostDetails";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import HomeView from "./pages/HomeView";
@@ -11,7 +11,9 @@ import "./sass/App.scss";
 import { connect } from "react-redux";
 import { firebaseAuthentication, firebaseDatabase } from "./firebase/firebase";
 import { addUser } from "./store/actions/user";
+import { setInitialPosts } from "./store/actions/posts";
 import UserProfile from "./pages/UserProfile";
+import PageNotFound from "./pages/PageNotFound";
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +29,8 @@ class App extends Component {
         dispatch(addUser(userData.data()));
       }
     });
+
+    dispatch(setInitialPosts());
   }
 
   render() {
@@ -39,7 +43,8 @@ class App extends Component {
             <PrivateRoute path="/profile" component={UserProfile} />
             <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/signup" component={SignUp} />
-            <Route path="/posts/:id" component={PostContent} />
+            <Route path="/posts/:id" component={PostDetails} />
+            <Route component={PageNotFound} />
           </Switch>
         </div>
       </Router>

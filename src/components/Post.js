@@ -10,7 +10,7 @@ class Post extends Component {
       postedCreated,
       postSince,
       postAuthorUrl,
-      postAuthorEmail,
+      postAuthorId,
     } = this.props.post;
     const { user } = this.props;
 
@@ -22,7 +22,7 @@ class Post extends Component {
           </div>
           <div className="post__info">
             <span className="post__text">
-              {user?.email === postAuthorEmail ? "You" : postAuthor}
+              {user?.id === postAuthorId ? "You" : postAuthor}
             </span>
             <span className="post__text">{`${postedCreated} (${moment(
               Number(postSince)

@@ -18,28 +18,30 @@ const Header = (props) => {
           <span>blogger</span>
         </div>
       </Link>
-      <nav className="header__nav">
-        <ul>
-          <Link to="/new-post">
-            <li className="header__nav--item btn-create">create post</li>
-          </Link>
-          {props.user && (
-            <Fragment>
-              <Link to="/profile">
-                <li className="header__nav--item">profile</li>
-              </Link>
-              <li onClick={logout} className="header__nav--item">
-                logout
-              </li>
-            </Fragment>
-          )}
-          {!props.user && (
-            <Link to="/login">
-              <li className="header__nav--item">Login</li>
+      {!props.hideNav && (
+        <nav className="header__nav">
+          <ul>
+            <Link to="/new-post">
+              <li className="header__nav--item btn-create">create post</li>
             </Link>
-          )}
-        </ul>
-      </nav>
+            {props.user && (
+              <Fragment>
+                <Link to="/profile">
+                  <li className="header__nav--item">profile</li>
+                </Link>
+                <li onClick={logout} className="header__nav--item">
+                  logout
+                </li>
+              </Fragment>
+            )}
+            {!props.user && (
+              <Link to="/login">
+                <li className="header__nav--item">Login</li>
+              </Link>
+            )}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 };

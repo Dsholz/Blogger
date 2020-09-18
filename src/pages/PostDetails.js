@@ -3,6 +3,7 @@ import { firebaseDatabase } from "../firebase/firebase";
 import Header from "../components/Header";
 import { connect } from "react-redux";
 import Skeleton from "react-loading-skeleton";
+import PostNotFound from "../components/PostNotFound";
 
 class PostContent extends Component {
   state = {
@@ -11,13 +12,12 @@ class PostContent extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    console.log(this.props.match.params);
+
     firebaseDatabase
       .collection("posts")
       .doc(id)
       .get()
       .then((doc) => {
-        console.log(doc.data());
         this.setState(() => ({
           post: doc.data(),
         }));
@@ -28,6 +28,18 @@ class PostContent extends Component {
   }
 
   render() {
+    const { posts } = this.props;
+    const { id } = this.props.match.params;
+    console.log(posts);
+    if (posts.length !== 0 && !posts?.includes(id)) {
+      return (
+        <Fragment>
+          <Header />
+          <PostNotFound />
+        </Fragment>
+      );
+    }
+
     const marked = require("marked");
     const { post } = this.props;
     const {
@@ -101,8 +113,9 @@ class PostContent extends Component {
 
 const mapStateToProps = ({ posts }, props) => {
   const { id } = props.match.params;
-  const post = posts ? posts[id] : [];
+  const post = posts ? posts[id] : {};
   return {
+    posts: posts ? Object.keys(posts) : [],
     post,
   };
 };

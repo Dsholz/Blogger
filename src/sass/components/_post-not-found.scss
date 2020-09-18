@@ -1,0 +1,18 @@
+.post-not-found {
+  width: 100%;
+  height: calc(100vh - 6.6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+
+  & > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  &__icon {
+    height: 40vw;
+    width: 80%;
+  }
+}
