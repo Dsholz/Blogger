@@ -32,7 +32,7 @@ export class PasswordReset extends Component {
         }, 6000);
       })
       .catch((err) => {
-        toast.success(`Error: ${err}`);
+        toast.error(err);
         this.setState(() => ({ loading: false }));
       });
   };
