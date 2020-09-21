@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { handleUserLogin } from "../store/actions/user";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { IconContext } from "react-icons";
+import { Link } from "react-router-dom";
 
 export class LoginForm extends Component {
   state = {
@@ -114,6 +115,11 @@ export class LoginForm extends Component {
               <p className="authentication__error">{errorMsg}</p>
             )}
           </div>
+
+          <Link to="/reset" className="authentication__reset">
+            <p>Forgot Password?</p>
+          </Link>
+
           <button
             type="submit"
             className="btn-auth btn-auth--1"

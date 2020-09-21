@@ -57,4 +57,15 @@
       background-color: #fff;
     }
   }
+
+  &__reset {
+    margin-right: 10%;
+    align-self: flex-end;
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+
+    @include respond(660px) {
+      margin-right: 0;
+    }
+  }
 }
