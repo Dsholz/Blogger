@@ -67,7 +67,7 @@ export class Profile extends Component {
         await firebaseDatabase.collection("users").doc(id).set(userData);
 
         toast.success("Upadate Successful");
-        this.setState(() => ({ loading: false }));
+        this.setState(() => ({ loading: false, password: "", rPassword: "" }));
       })
       .catch((err) => {
         setTimeout(() => {

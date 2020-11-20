@@ -21,16 +21,13 @@ class PostContent extends Component {
         this.setState(() => ({
           post: doc.data(),
         }));
-      })
-      .catch(() => {
-        console.log("Error");
       });
   }
 
   render() {
     const { posts } = this.props;
     const { id } = this.props.match.params;
-    console.log(posts);
+
     if (posts.length !== 0 && !posts?.includes(id)) {
       return (
         <Fragment>

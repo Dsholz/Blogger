@@ -2,7 +2,7 @@ import { firebaseStorage } from "./firebase/firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export const generateRandomAvatar = () =>
-  `https://api.adorable.io/avatars/152/${uuidv4()}.png`;
+  `https://avatars.dicebear.com/api/avataaars/${uuidv4()}.svg`;
 
 export const getImageUrl = (image) => {
   let imageUrl;

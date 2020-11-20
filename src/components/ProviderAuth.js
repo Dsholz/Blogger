@@ -10,9 +10,7 @@ export class ProviderAuth extends Component {
   signInWithProvider = (provider) => {
     const { dispatch } = this.props;
 
-    dispatch(handleProviderAuth(provider)).catch((data) => {
-      console.log(data);
-    });
+    dispatch(handleProviderAuth(provider));
   };
 
   render() {

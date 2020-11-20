@@ -62,9 +62,6 @@ class NewPost extends Component {
         this.setState(() => ({ loading: false }));
 
         toast.success("Post Created Successfully");
-      })
-      .catch((error) => {
-        console.log(error);
       });
   };
 
@@ -81,19 +78,14 @@ class NewPost extends Component {
 
     this.setState(() => ({ loadingCover: true }));
 
-    storageReference
-      .put(e.target.files[0])
-      .then(async () => {
-        const coverUrl = await storageReference.getDownloadURL();
+    storageReference.put(e.target.files[0]).then(async () => {
+      const coverUrl = await storageReference.getDownloadURL();
 
-        this.setState(() => ({
-          loadingCover: false,
-          postCover: coverUrl,
-        }));
-      })
-      .catch((err) => {
-        console.log("Upload Error");
-      });
+      this.setState(() => ({
+        loadingCover: false,
+        postCover: coverUrl,
+      }));
+    });
   };
 
   render() {

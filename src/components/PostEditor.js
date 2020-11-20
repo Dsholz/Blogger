@@ -26,7 +26,7 @@ class NewPost extends Component {
           uploadFinished: progress !== 100 ? false : true,
         }));
       },
-      (err) => console.log(err),
+      undefined,
       () => {
         storageReference.getDownloadURL().then((url) => {
           this.setState(() => ({
